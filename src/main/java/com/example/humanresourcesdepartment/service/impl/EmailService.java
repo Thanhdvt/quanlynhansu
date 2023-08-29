@@ -20,6 +20,7 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
+    //REVIEW should use constructor injection
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -32,6 +33,7 @@ public class EmailService {
     @Autowired
     private WorkDayService workDayService;
 
+    //REVIEW schedule should move to independent file grouped into same package
     @Scheduled(cron = "0 0 9 1 * ?")
     public void sendEmailNumberWorkDay() {
         Date date = new Date();
