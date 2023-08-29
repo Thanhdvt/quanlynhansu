@@ -3,7 +3,6 @@ package com.example.humanresourcesdepartment.service.impl;
 import com.example.humanresourcesdepartment.model.Employee;
 import com.example.humanresourcesdepartment.repository.EmployeeRepository;
 import com.example.humanresourcesdepartment.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -12,8 +11,10 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
     private EmployeeRepository employeeRepository;
+    EmployeeServiceImpl (EmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public List<Employee> getAllEmloyee() {

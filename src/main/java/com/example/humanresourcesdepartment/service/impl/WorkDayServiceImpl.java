@@ -1,17 +1,18 @@
 package com.example.humanresourcesdepartment.service.impl;
 
-import com.example.humanresourcesdepartment.model.WorkDay;
 import com.example.humanresourcesdepartment.model.Employee;
+import com.example.humanresourcesdepartment.model.WorkDay;
 import com.example.humanresourcesdepartment.repository.WorkDayRepository;
 import com.example.humanresourcesdepartment.service.WorkDayService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WorkDayServiceImpl implements WorkDayService {
 
-    @Autowired
     private WorkDayRepository workDayRepository;
+    WorkDayServiceImpl(WorkDayRepository workDayRepository){
+        this.workDayRepository = workDayRepository;
+    }
 
     @Override
     public WorkDay getWorkDayById(Long id) {

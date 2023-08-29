@@ -4,7 +4,6 @@ package com.example.humanresourcesdepartment.service.impl;
 import com.example.humanresourcesdepartment.model.InfoRest;
 import com.example.humanresourcesdepartment.repository.InfoRestRepository;
 import com.example.humanresourcesdepartment.service.InfoRestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +11,10 @@ import java.util.List;
 @Service
 public class InfoRestServiceImpl implements InfoRestService {
 
-    @Autowired
     private InfoRestRepository infoRestRepository;
+    InfoRestServiceImpl(InfoRestRepository infoRestRepository){
+        this.infoRestRepository = infoRestRepository;
+    }
 
     @Override
     public List<InfoRest> getAllInfoRest() {
@@ -38,18 +39,14 @@ public class InfoRestServiceImpl implements InfoRestService {
     @Override
     public InfoRest updateInfoRest(InfoRest infoRest) {
         InfoRest existing = infoRestRepository.findById(infoRest.getId()).orElse(null);
-        if (existing != null) {
-            //REVIEW should grouped into 1 function in InfoRest class. Example: existing.updateInfo(infoRest);
-            existing.setStartDay(infoRest.getStartDay());
-            existing.setEndDay(infoRest.getEndDay());
-            existing.setReason(infoRest.getReason());
-            existing.setStatus(infoRest.getStatus());
-            existing.setEmployee(infoRest.getEmployee());
-            existing.setLeader(infoRest.getLeader());
-            return infoRestRepository.save(existing);
-        } else {
-            //REVIEW flip if-else and remove redundant else
+
+        //REVIEW flip if-else and remove redundant else
+        if (existing == null) {
             return null;
         }
+
+        //REVIEW should grouped into 1 function in InfoRest class. Example: existing.updateInfo(infoRest);
+        existing.updateInfo(infoRest);
+        return infoRestRepository.save(existing);
     }
 }

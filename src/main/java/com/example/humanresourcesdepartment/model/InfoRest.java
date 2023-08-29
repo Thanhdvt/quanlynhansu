@@ -47,4 +47,14 @@ public class InfoRest {
     @ManyToOne
     @JoinColumn(name = "leader_id", nullable = false)
     private Employee leader;
+
+    public InfoRest updateInfo(InfoRest infoRest){
+        this.setStartDay(infoRest.getStartDay());
+        this.setEndDay(infoRest.getEndDay());
+        this.setReason(infoRest.getReason());
+        this.setStatus(infoRest.getStatus());
+        this.setEmployee(infoRest.getEmployee());
+        this.setLeader(infoRest.getLeader());
+        return  infoRest;
+    }
 }

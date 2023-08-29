@@ -1,7 +1,8 @@
 package com.example.humanresourcesdepartment.controller;
 
 
-import com.example.humanresourcesdepartment.service.impl.EmailService;
+import com.example.humanresourcesdepartment.service.impl.SchedualEmailRestWorkDay;
+import com.example.humanresourcesdepartment.service.impl.SchedualForEmailNumberWorkDay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,18 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/email")
 public class EmailController {
 
-    @Autowired
-    private EmailService emailService;
+    SchedualForEmailNumberWorkDay schedualForEmailNumberWorkDay;
+    SchedualEmailRestWorkDay schedualEmailRestWorkDay;
+
+    EmailController(SchedualForEmailNumberWorkDay schedualForEmailNumberWorkDay, SchedualEmailRestWorkDay schedualEmailRestWorkDay){
+        this.schedualEmailRestWorkDay = schedualEmailRestWorkDay;
+        this.schedualForEmailNumberWorkDay = schedualForEmailNumberWorkDay;
+    }
 
     @GetMapping("/number-work-day")
     public ResponseEntity<String> sendEmailNumberWorkDay() {
-        emailService.sendEmailNumberWorkDay();
+        schedualForEmailNumberWorkDay.sendEmailNumberWorkDay();
         return ResponseEntity.ok("Sended mail for confirm workday");
     }
 
     @GetMapping("/rest-work-day")
     public ResponseEntity<String> sendEmailRestWOrkDay() {
-        emailService.sendEmailRestWorkDay();
+        schedualEmailRestWorkDay.sendEmailRestWorkDay();
         return ResponseEntity.ok("Sended mail for confirm rest work day");
     }
 }
