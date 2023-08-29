@@ -10,20 +10,20 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "bang_cong")
-public class BangCong {
+@Table(name = "work_day")
+public class WorkDay {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "nhan_vien_id")
-    private NhanVien nhanVien;
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
-    @Column(name = "ngay")
-    private LocalDate ngay;
+    @Column(name = "date")
+    private LocalDate date;
 
-    @Column(name = "co_di_lam")
-    private Boolean coDiLam;
+    @Column(name = "has_work")
+    private Boolean has_work;
 }

@@ -15,17 +15,15 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    // gửi email thông báo số ngày đi làm trong tháng
-    @GetMapping("/thong-bao-so-ngay-cong")
-    public ResponseEntity<String> sendEmailThongBaoSoNgayCong() {
-        emailService.sendEmailThongBaoSoNgayCong();
-        return ResponseEntity.ok("Đã gửi email thông báo bảng công trong tháng");
+    @GetMapping("/number-work-day")
+    public ResponseEntity<String> sendEmailNumberWorkDay() {
+        emailService.sendEmailNumberWorkDay();
+        return ResponseEntity.ok("Sended mail for confirm workday");
     }
 
-    // gửi email thông báo xin nghỉ
-    @GetMapping("/thong-bao-nghi")
-    public ResponseEntity<String> sendEmailThongBaoNghi() {
-        emailService.sendEmailThongBaoNghi();
-        return ResponseEntity.ok("Đã gửi email thông báo xin nghỉ");
+    @GetMapping("/rest-work-day")
+    public ResponseEntity<String> sendEmailRestWOrkDay() {
+        emailService.sendEmailRestWorkDay();
+        return ResponseEntity.ok("Sended mail for confirm rest work day");
     }
 }

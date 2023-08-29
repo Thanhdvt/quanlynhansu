@@ -1,11 +1,10 @@
 package com.example.quanlynhansu.service.impl;
 
-import com.example.quanlynhansu.model.NhanVien;
-import com.example.quanlynhansu.model.ThongTinXinNghi;
-import com.example.quanlynhansu.repository.BangCongRepository;
-import com.example.quanlynhansu.service.BangCongService;
-import com.example.quanlynhansu.service.NhanVienService;
-import com.example.quanlynhansu.service.ThongTinXinNghiService;
+import com.example.quanlynhansu.model.Employee;
+import com.example.quanlynhansu.model.InfoRest;
+import com.example.quanlynhansu.service.WorkDayService;
+import com.example.quanlynhansu.service.EmployeeService;
+import com.example.quanlynhansu.service.InfoRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -25,60 +24,49 @@ public class EmailService {
     private JavaMailSender javaMailSender;
 
     @Autowired
-    private NhanVienService nhanVienService;
+    private EmployeeService employeeService;
 
     @Autowired
-    private ThongTinXinNghiService thongTinXinNghiService;
+    private InfoRestService infoRestService;
 
     @Autowired
-    private BangCongService bangCongService;
+    private WorkDayService workDayService;
 
-    // email gửi ngày đầu tiên mỗi tháng thông báo tổng số ngày đi làm trong tháng
-    @Scheduled(cron = "0 0 9 1 * ?") // chạy vào lúc 9h sáng ngày đầu tiên mỗi tháng
-    public void sendEmailThongBaoSoNgayCong() {
+    @Scheduled(cron = "0 0 9 1 * ?")
+    public void sendEmailNumberWorkDay() {
         Date date = new Date();
         int month = date.getMonth() + 1; // test
 //        int month = date.getMonth();
-        List<NhanVien> list = nhanVienService.getAllNhanVien();
-        for (NhanVien nhanVien : list) {
-            int soNgayDiLam = bangCongService.countSoNgayDiLam(nhanVien, month);
-            String subject = "Thống kê số ngày công trong tháng";
-            String text = "Xin chào " + nhanVien.getHoTen() + ",\n\n"
-                    + "Bạn đã đi làm " + soNgayDiLam + " ngày trong tháng vừa qua.\n\n"
-                    + "Cảm ơn bạn đã làm việc chăm chỉ và hiệu quả.\n\n"
-                    + "Trân trọng,\n"
-                    + "Quản lý nhân sự";
-            sendEmail(nhanVien.getEmail(), subject, text);
-            System.out.println("Da gui bang cong cho nhan vien: " + nhanVien.getHoTen());
+        List<Employee> list = employeeService.getAllEmloyee();
+        for (Employee employee : list) {
+            int soNgayDiLam = workDayService.countNumberDayHasWork(employee, month);
+            String subject = "Cofrimation Salary";
+            String text = "Hi" + employee.getName() + ",\n\n"
+                    + "You has " + soNgayDiLam + " work day in month.\n\n";
+            sendEmail(employee.getEmail(), subject, text);
+            System.out.println("Sended workday to employee: " + employee.getName());
         }
     }
 
-    // Bo dung thêm database ngày tạo mail phân biệt với ngày bắt đầu nghỉ
-
-    // thông báo email nghỉ tới người phụ trách vào 8h sáng mỗi ngày nếu có thông tin xin nghỉ
-    @Scheduled(cron = "0 0 8 * * ?") // chạy vào lúc 8h sáng mỗi ngày
-    public void sendEmailThongBaoNghi() {
+    @Scheduled(cron = "0 0 8 * * ?")
+    public void sendEmailRestWorkDay() {
         Date date = new Date();
         int day = date.getDate(); //test
 //        int day = date.getDate() - 1;
         System.out.println(date.getDate());
-        List<ThongTinXinNghi> list = thongTinXinNghiService.getThongTinXinNghiByNgay(day);
-        for (ThongTinXinNghi thongTinXinNghi : list) {
-            NhanVien nhanVien = thongTinXinNghi.getNhanVien();
-            NhanVien phuTrach = thongTinXinNghi.getPhuTrach();
-            String subject = "Thông báo xin nghỉ";
-            String text = "Xin chào " + phuTrach.getHoTen() + ",\n\n"
-                    + "Nhân viên " + nhanVien.getHoTen() + " đã xin nghỉ vào ngày hôm nay (" + date + ").\n\n"
-                    + "Lý do xin nghỉ: " + thongTinXinNghi.getLyDo() + ".\n\n"
-                    + "Vui lòng xem xét và phê duyệt yêu cầu xin nghỉ của nhân viên.\n\n"
-                    + "Trân trọng,\n"
-                    + "Quản lý nhân sự";
-            sendEmail(phuTrach.getEmail(), subject, text);
-            System.out.println("Da gui bang nghi cua nhan vien " + nhanVien.getHoTen());
+        List<InfoRest> list = infoRestService.getInfoRestByNgay(day);
+        for (InfoRest infoRest : list) {
+            Employee employee = infoRest.getEmployee();
+            Employee leader = infoRest.getLeader();
+            String subject = "Confirm RestDay Mail";
+            String text = "Hi " + leader.getName() + ",\n\n"
+                    + "Employee " + employee.getName() + " sended a mail for rest day (" + date + ").\n\n"
+                    + "Reason : " + infoRest.getReason() + ".\n\n";
+            sendEmail(leader.getEmail(), subject, text);
+            System.out.println("Sended mail rest work day of employee: " + employee.getName());
         }
     }
 
-    // hàm gửi email
     public void sendEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromEmail);

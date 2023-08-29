@@ -1,0 +1,53 @@
+package com.example.quanlynhansu.service.impl;
+
+
+import com.example.quanlynhansu.model.InfoRest;
+import com.example.quanlynhansu.repository.InfoRestRepository;
+import com.example.quanlynhansu.service.InfoRestService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class InfoRestServiceImpl implements InfoRestService {
+
+    @Autowired
+    private InfoRestRepository infoRestRepository;
+
+    @Override
+    public List<InfoRest> getAllInfoRest() {
+        return infoRestRepository.findAll();
+    }
+
+    @Override
+    public InfoRest getInfoRestById(Long id) {
+        return infoRestRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<InfoRest> getInfoRestByNgay(int ngay) {
+        return infoRestRepository.findByModifiedDay(ngay);
+    }
+
+    @Override
+    public InfoRest addInfoRest(InfoRest infoRest) {
+        return infoRestRepository.save(infoRest);
+    }
+
+    @Override
+    public InfoRest updateInfoRest(InfoRest infoRest) {
+        InfoRest existing = infoRestRepository.findById(infoRest.getId()).orElse(null);
+        if (existing != null) {
+            existing.setStartDay(infoRest.getStartDay());
+            existing.setEndDay(infoRest.getEndDay());
+            existing.setReason(infoRest.getReason());
+            existing.setStatus(infoRest.getStatus());
+            existing.setEmployee(infoRest.getEmployee());
+            existing.setLeader(infoRest.getLeader());
+            return infoRestRepository.save(existing);
+        } else {
+            return null;
+        }
+    }
+}
