@@ -1,10 +1,10 @@
-package com.example.quanlynhansu;
+package com.example.humanresourcesdepartment;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuanlynhansuApplicationTests {
+class HumanResourcesDepartmentApplicationTests {
 
     @Test
     void contextLoads() {

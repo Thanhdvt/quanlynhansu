@@ -1,6 +1,6 @@
-package com.example.quanlynhansu.repository;
+package com.example.humanresourcesdepartment.repository;
 
-import com.example.quanlynhansu.model.Employee;
+import com.example.humanresourcesdepartment.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

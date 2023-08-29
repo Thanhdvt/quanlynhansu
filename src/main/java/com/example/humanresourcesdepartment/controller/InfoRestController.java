@@ -1,7 +1,7 @@
-package com.example.quanlynhansu.controller;
+package com.example.humanresourcesdepartment.controller;
 
-import com.example.quanlynhansu.model.InfoRest;
-import com.example.quanlynhansu.service.InfoRestService;
+import com.example.humanresourcesdepartment.model.InfoRest;
+import com.example.humanresourcesdepartment.service.InfoRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

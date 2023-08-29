@@ -1,6 +1,6 @@
-package com.example.quanlynhansu.service;
+package com.example.humanresourcesdepartment.service;
 
-import com.example.quanlynhansu.model.Employee;
+import com.example.humanresourcesdepartment.model.Employee;
 
 import java.util.Date;
 import java.util.List;

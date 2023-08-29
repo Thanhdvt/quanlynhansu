@@ -1,7 +1,7 @@
-package com.example.quanlynhansu.controller;
+package com.example.humanresourcesdepartment.controller;
 
-import com.example.quanlynhansu.model.Employee;
-import com.example.quanlynhansu.service.EmployeeService;
+import com.example.humanresourcesdepartment.model.Employee;
+import com.example.humanresourcesdepartment.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

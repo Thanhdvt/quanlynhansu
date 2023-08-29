@@ -1,4 +1,4 @@
-package com.example.quanlynhansu.model;
+package com.example.humanresourcesdepartment.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

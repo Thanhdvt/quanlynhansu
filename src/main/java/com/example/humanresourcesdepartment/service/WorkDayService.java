@@ -1,7 +1,7 @@
-package com.example.quanlynhansu.service;
+package com.example.humanresourcesdepartment.service;
 
-import com.example.quanlynhansu.model.WorkDay;
-import com.example.quanlynhansu.model.Employee;
+import com.example.humanresourcesdepartment.model.WorkDay;
+import com.example.humanresourcesdepartment.model.Employee;
 
 public interface WorkDayService {
 

@@ -1,7 +1,7 @@
-package com.example.quanlynhansu.controller;
+package com.example.humanresourcesdepartment.controller;
 
 
-import com.example.quanlynhansu.service.impl.EmailService;
+import com.example.humanresourcesdepartment.service.impl.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

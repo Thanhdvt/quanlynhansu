@@ -1,9 +1,9 @@
-package com.example.quanlynhansu.service.impl;
+package com.example.humanresourcesdepartment.service.impl;
 
-import com.example.quanlynhansu.model.WorkDay;
-import com.example.quanlynhansu.model.Employee;
-import com.example.quanlynhansu.repository.WorkDayRepository;
-import com.example.quanlynhansu.service.WorkDayService;
+import com.example.humanresourcesdepartment.model.WorkDay;
+import com.example.humanresourcesdepartment.model.Employee;
+import com.example.humanresourcesdepartment.repository.WorkDayRepository;
+import com.example.humanresourcesdepartment.service.WorkDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

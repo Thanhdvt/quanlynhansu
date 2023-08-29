@@ -1,6 +1,6 @@
-package com.example.quanlynhansu.service;
+package com.example.humanresourcesdepartment.service;
 
-import com.example.quanlynhansu.model.InfoRest;
+import com.example.humanresourcesdepartment.model.InfoRest;
 
 import java.util.List;
 

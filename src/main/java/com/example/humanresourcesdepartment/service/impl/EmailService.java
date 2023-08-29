@@ -1,10 +1,10 @@
-package com.example.quanlynhansu.service.impl;
+package com.example.humanresourcesdepartment.service.impl;
 
-import com.example.quanlynhansu.model.Employee;
-import com.example.quanlynhansu.model.InfoRest;
-import com.example.quanlynhansu.service.WorkDayService;
-import com.example.quanlynhansu.service.EmployeeService;
-import com.example.quanlynhansu.service.InfoRestService;
+import com.example.humanresourcesdepartment.model.Employee;
+import com.example.humanresourcesdepartment.model.InfoRest;
+import com.example.humanresourcesdepartment.service.WorkDayService;
+import com.example.humanresourcesdepartment.service.EmployeeService;
+import com.example.humanresourcesdepartment.service.InfoRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
