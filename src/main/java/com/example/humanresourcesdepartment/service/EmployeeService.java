@@ -1,5 +1,6 @@
 package com.example.humanresourcesdepartment.service;
 
+import com.example.humanresourcesdepartment.dto.EmployeeDto;
 import com.example.humanresourcesdepartment.model.Employee;
 
 import java.util.Date;
@@ -7,21 +8,21 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getAllEmloyee();
+    List<EmployeeDto> getAllEmloyee();
 
-    Employee getEmployeeById(Long id);
+    EmployeeDto getEmployeeById(Long id);
 
-    Employee saveEmployee(Employee employee);
+    EmployeeDto saveEmployee(EmployeeDto employeeDto);
 
     void deleteEmployeeById(Long id);
 
-    Employee getEmployeeByEmail(String email);
+    EmployeeDto getEmployeeByEmail(String email);
 
-    List<Employee> getEmployeeByPosition(String position);
+    List<EmployeeDto> getEmployeeByPosition(String position);
 
-    List<Employee> getEmployeeByStatus(boolean status);
+    List<EmployeeDto> getEmployeeByStatus(boolean status);
 
-    List<Employee> getEmployeeByNameContaining(String keyword);
+    List<EmployeeDto> getEmployeeByNameContaining(String keyword);
 
-    List<Employee> getEmployeeByBirthDayBetween(Date start, Date end);
+    List<EmployeeDto> getEmployeeByBirthDayBetween(Date start, Date end);
 }

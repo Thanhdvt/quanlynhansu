@@ -1,7 +1,7 @@
 package com.example.humanresourcesdepartment.service.impl;
 
-import com.example.humanresourcesdepartment.model.Employee;
-import com.example.humanresourcesdepartment.model.InfoRest;
+import com.example.humanresourcesdepartment.dto.EmployeeDto;
+import com.example.humanresourcesdepartment.dto.InfoRestDto;
 import com.example.humanresourcesdepartment.service.InfoRestService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -25,16 +25,16 @@ public class SchedualEmailRestWorkDay {
         int day = date.getDate(); //test
 //        int day = date.getDate() - 1;
         System.out.println(date.getDate());
-        List<InfoRest> list = infoRestService.getInfoRestByNgay(day);
-        for (InfoRest infoRest : list) {
-            Employee employee = infoRest.getEmployee();
-            Employee leader = infoRest.getLeader();
+        List<InfoRestDto> list = infoRestService.getInfoRestByNgay(day);
+        for (InfoRestDto infoRestDto : list) {
+            EmployeeDto employeeDto = infoRestDto.getEmployeeDto();
+            EmployeeDto leaderDto = infoRestDto.getLeaderDto();
             String subject = "Confirm RestDay Mail";
-            String text = "Hi " + leader.getName() + ",\n\n"
-                    + "Employee " + employee.getName() + " sended a mail for rest day (" + date + ").\n\n"
-                    + "Reason : " + infoRest.getReason() + ".\n\n";
-            emailService.sendEmail(leader.getEmail(), subject, text);
-            System.out.println("Sended mail rest work day of employee: " + employee.getName());
+            String text = "Hi " + leaderDto.getName() + ",\n\n"
+                    + "Employee " + employeeDto.getName() + " sended a mail for rest day (" + date + ").\n\n"
+                    + "Reason : " + infoRestDto.getReason() + ".\n\n";
+            emailService.sendEmail(leaderDto.getEmail(), subject, text);
+            System.out.println("Sended mail rest work day of employee: " + employeeDto.getName());
         }
     }
 }

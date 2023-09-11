@@ -1,18 +1,19 @@
 package com.example.humanresourcesdepartment.service;
 
+import com.example.humanresourcesdepartment.dto.InfoRestDto;
 import com.example.humanresourcesdepartment.model.InfoRest;
 
 import java.util.List;
 
 public interface InfoRestService {
 
-    List<InfoRest> getAllInfoRest();
+    List<InfoRestDto> getAllInfoRest();
 
-    InfoRest getInfoRestById(Long id);
+    InfoRestDto getInfoRestById(Long id);
 
-   List<InfoRest> getInfoRestByNgay(int ngay);
+   List<InfoRestDto> getInfoRestByNgay(int ngay);
 
-    InfoRest addInfoRest(InfoRest infoRest);
+    InfoRestDto addInfoRest(InfoRestDto infoRestDto);
 
-    InfoRest updateInfoRest(InfoRest infoRest);
+    InfoRestDto updateInfoRest(InfoRestDto infoRestDto);
 }

@@ -1,5 +1,7 @@
 package com.example.humanresourcesdepartment.controller;
 
+import com.example.humanresourcesdepartment.dto.EmployeeDto;
+import com.example.humanresourcesdepartment.dto.WorkDayDto;
 import com.example.humanresourcesdepartment.model.WorkDay;
 import com.example.humanresourcesdepartment.model.Employee;
 import com.example.humanresourcesdepartment.service.WorkDayService;
@@ -20,17 +22,17 @@ public class WorkDayController {
     private EmployeeService employeeService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<WorkDay> getWorkDayById(@PathVariable Long id) {
-        WorkDay workDay = workDayService.getWorkDayById(id);
-        if (workDay == null) {
+    public ResponseEntity<WorkDayDto> getWorkDayById(@PathVariable Long id) {
+        WorkDayDto workDayDto = workDayService.getWorkDayById(id);
+        if (workDayDto == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(workDay);
+        return ResponseEntity.ok(workDayDto);
     }
 
     @PostMapping
-    public ResponseEntity<WorkDay> saveWorkDay(@RequestBody WorkDay workDay) {
-        WorkDay savedWorkDay = workDayService.saveWorkDay(workDay);
+    public ResponseEntity<WorkDayDto> saveWorkDay(@RequestBody WorkDayDto workDayDto) {
+        WorkDayDto savedWorkDay = workDayService.saveWorkDay(workDayDto);
         return ResponseEntity.created(URI.create("/api/work-day/" + savedWorkDay.getId())).body(savedWorkDay);
     }
 
@@ -42,11 +44,11 @@ public class WorkDayController {
 
     @GetMapping("/calculate-salary")
     public ResponseEntity<Double> calculateSalary(@RequestParam("employeeId") Long employeeId, @RequestParam("month") int month) {
-        Employee employee = employeeService.getEmployeeById(employeeId);
-        if (employee == null) {
+        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
+        if (employeeDto == null) {
             return ResponseEntity.notFound().build();
         }
-        double salary = workDayService.calculate_Salary(employee, month);
+        double salary = workDayService.calculate_Salary(employeeDto, month);
         return ResponseEntity.ok(salary);
     }
 }

@@ -1,34 +1,44 @@
 package com.example.humanresourcesdepartment.service.impl;
 
+import com.example.humanresourcesdepartment.dto.EmployeeDto;
+import com.example.humanresourcesdepartment.dto.WorkDayDto;
 import com.example.humanresourcesdepartment.model.Employee;
 import com.example.humanresourcesdepartment.repository.EmployeeRepository;
 import com.example.humanresourcesdepartment.service.EmployeeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
+    private ModelMapper modelMapper = new ModelMapper();
     EmployeeServiceImpl (EmployeeRepository employeeRepository){
         this.employeeRepository = employeeRepository;
     }
 
     @Override
-    public List<Employee> getAllEmloyee() {
-        return employeeRepository.findAll();
+    public List<EmployeeDto> getAllEmloyee() {
+        List<Employee> employees = employeeRepository.findAll();
+        List<EmployeeDto> employeeDtos = employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
+                .collect(Collectors.toList());
+        return employeeDtos;
     }
 
     @Override
-    public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id).orElse(null);
+    public EmployeeDto getEmployeeById(Long id) {
+        return modelMapper.map(employeeRepository.findById(id).orElse(null), EmployeeDto.class);
     }
 
     @Override
-    public Employee saveEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        return modelMapper.map(employeeRepository.save(employee), EmployeeDto.class);
     }
 
     @Override
@@ -37,28 +47,45 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeByEmail(String email) {
-        return employeeRepository.findByEmail(email);
+    public EmployeeDto getEmployeeByEmail(String email) {
+        return modelMapper.map(employeeRepository.findByEmail(email), EmployeeDto.class);
     }
 
     @Override
-    public List<Employee> getEmployeeByPosition(String position) {
-        return employeeRepository.findByPosition(position);
+    public List<EmployeeDto> getEmployeeByPosition(String position) {
+
+        List<Employee> employees = employeeRepository.findByPosition(position);
+        List<EmployeeDto> employeeDtos = employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
+                .collect(Collectors.toList());
+        return employeeDtos;
     }
 
     @Override
-    public List<Employee> getEmployeeByStatus(boolean status) {
-        return employeeRepository.findByStatusEmployee(status);
+    public List<EmployeeDto> getEmployeeByStatus(boolean status) {
+        List<Employee> employees = employeeRepository.findByStatusEmployee(status);
+        List<EmployeeDto> employeeDtos = employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
+                .collect(Collectors.toList());
+        return employeeDtos;
     }
 
     @Override
-    public List<Employee> getEmployeeByNameContaining(String keyword) {
-        return employeeRepository.findByNameContaining(keyword);
+    public List<EmployeeDto> getEmployeeByNameContaining(String keyword) {
+        List<Employee> employees = employeeRepository.findByNameContaining(keyword);
+        List<EmployeeDto> employeeDtos = employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
+                .collect(Collectors.toList());
+        return employeeDtos;
     }
 
     @Override
-    public List<Employee> getEmployeeByBirthDayBetween(Date start, Date end) {
-        return employeeRepository.findByBirthDayBetween(start, end);
+    public List<EmployeeDto> getEmployeeByBirthDayBetween(Date start, Date end) {
+        List<Employee> employees = employeeRepository.findByBirthDayBetween(start, end);
+        List<EmployeeDto> employeeDtos = employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
+                .collect(Collectors.toList());
+        return employeeDtos;
     }
 }
 

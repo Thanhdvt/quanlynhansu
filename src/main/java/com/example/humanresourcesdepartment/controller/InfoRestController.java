@@ -1,5 +1,6 @@
 package com.example.humanresourcesdepartment.controller;
 
+import com.example.humanresourcesdepartment.dto.InfoRestDto;
 import com.example.humanresourcesdepartment.model.InfoRest;
 import com.example.humanresourcesdepartment.service.InfoRestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +19,20 @@ public class InfoRestController {
     private InfoRestService infoRestService;
 
     @GetMapping
-    public ResponseEntity<List<InfoRest>> getAllInfoRest() {
-        List<InfoRest> list = infoRestService.getAllInfoRest();
+    public ResponseEntity<List<InfoRestDto>> getAllInfoRest() {
+        List<InfoRestDto> list = infoRestService.getAllInfoRest();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<InfoRest> getInfoRestById(@PathVariable("id") Long id) {
-        InfoRest infoRest = infoRestService.getInfoRestById(id);
-        return new ResponseEntity<>(infoRest, HttpStatus.OK);
+    public ResponseEntity<InfoRestDto> getInfoRestById(@PathVariable("id") Long id) {
+        InfoRestDto Dto = infoRestService.getInfoRestById(id);
+        return new ResponseEntity<>(Dto, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<InfoRest> saveInfoRest(@RequestBody InfoRest infoRest) {
-        InfoRest newInfoRest = infoRestService.addInfoRest(infoRest);
-        return new ResponseEntity<>(newInfoRest, HttpStatus.OK);
+    public ResponseEntity<InfoRestDto> saveInfoRest(@RequestBody InfoRestDto infoRestDto) {
+        InfoRestDto newInfoRestDto = infoRestService.addInfoRest(infoRestDto);
+        return new ResponseEntity<>(newInfoRestDto, HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.humanresourcesdepartment.controller;
 
+import com.example.humanresourcesdepartment.dto.EmployeeDto;
 import com.example.humanresourcesdepartment.model.Employee;
 import com.example.humanresourcesdepartment.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +18,20 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployee() {
-        List<Employee> list = employeeService.getAllEmloyee();
+    public ResponseEntity<List<EmployeeDto>> getAllEmployee() {
+        List<EmployeeDto> list = employeeService.getAllEmloyee();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
-        Employee employee = employeeService.getEmployeeById(id);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long id) {
+        EmployeeDto employeeDto = employeeService.getEmployeeById(id);
+        return new ResponseEntity<>(employeeDto, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
-        Employee savedEmployee = employeeService.saveEmployee(employee);
+    public ResponseEntity<EmployeeDto> saveEmployee(@RequestBody EmployeeDto employeeDto) {
+        EmployeeDto savedEmployee = employeeService.saveEmployee(employeeDto);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
@@ -41,20 +42,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<Employee> getEmployeeByEmail(@PathVariable("email") String email) {
-        Employee employee = employeeService.getEmployeeByEmail(email);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+    public ResponseEntity<EmployeeDto> getEmployeeByEmail(@PathVariable("email") String email) {
+        EmployeeDto employeeDto = employeeService.getEmployeeByEmail(email);
+        return new ResponseEntity<>(employeeDto, HttpStatus.OK);
     }
 
     @GetMapping("/position/{position}")
-    public ResponseEntity<List<Employee>> getEmployeeByVaiTro(@PathVariable("position") String position) {
-        List<Employee> list = employeeService.getEmployeeByPosition(position);
+    public ResponseEntity<List<EmployeeDto>> getEmployeeByVaiTro(@PathVariable("position") String position) {
+        List<EmployeeDto> list = employeeService.getEmployeeByPosition(position);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<Employee>> getEmployeeByStatus(@PathVariable("status") boolean status) {
-        List<Employee> list = employeeService.getEmployeeByStatus(status);
+    public ResponseEntity<List<EmployeeDto>> getEmployeeByStatus(@PathVariable("status") boolean status) {
+        List<EmployeeDto> list = employeeService.getEmployeeByStatus(status);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
