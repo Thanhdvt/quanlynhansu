@@ -24,7 +24,6 @@ public class SchedualEmailRestWorkDay {
         Date date = new Date();
         int day = date.getDate(); //test
 //        int day = date.getDate() - 1;
-        System.out.println(date.getDate());
         List<InfoRestDto> list = infoRestService.getInfoRestByNgay(day);
         for (InfoRestDto infoRestDto : list) {
             EmployeeDto employeeDto = infoRestDto.getEmployeeDto();
